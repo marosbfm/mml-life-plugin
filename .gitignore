@@ -41,6 +41,6 @@ gradle-app.setting
 # IntelliJ
 /out/
 
-
-/server/
-!/server/server.jar
+!server/
+server/*
+!server/server.jar
