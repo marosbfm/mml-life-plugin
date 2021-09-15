@@ -21,3 +21,17 @@ https://github.com/TechnoVisionDev/Spigot-Coding-Tutorial/blob/master/Episode_08
 java -Xms2G -Xmx2G -jar server.jar --nogui
 
 scp .\mml-life-plugin-1.0-SNAPSHOT.jar minecraft@185.91.116.101:~/minecraft-paperms-1.17.1/plugins/.
+
+
+
+screen
+
+screen -S minecraft - vytvori pomenovany screen
+
+Ctrl+a d - odpoji
+
+screen -r minecraft
+
+killall screen - ukonci vsetky screeny
+
+https://linuxize.com/post/how-to-use-linux-screen/
