@@ -1,0 +1,5 @@
+mml-life-plugin:
+  lives-count: 5
+  reset-interval:
+    amount: 2
+    unit: DAYS # MINUTES HOURS DAYS WEEKS

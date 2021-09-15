@@ -1,0 +1,18 @@
+name: mml-life-plugin
+version: 1.0
+author: maroskomml
+main: sk.maroskomml.lifeplugin.LifePlugin
+api-version: 1.17
+commands:
+  mmlmylife:
+    description: Zobrazi kolko mas zivota
+    usage: /<command>
+    aliases: mmlml
+  mmllife:
+    description: Zobrazi kolko zivota ma hrac
+    usage: /<command> [player]
+    aliases: mmll
+  mmlgivelife:
+    description: Umozni dat svoj zivot inemu hracovi. Nemozes dat viac zivotov nez mas.
+    usage: /<command> [player] number
+    aliases: mmlgl
