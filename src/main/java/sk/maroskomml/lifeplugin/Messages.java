@@ -58,4 +58,8 @@ public class Messages {
     public static String globalPlayerSentLife(String name, String receiverNick, int count) {
         return ChatColor.RED+"Hrac " + name + " poslal hracovi " + receiverNick + " " + count + " zivotov.";
     }
+
+    public static String globalAllPlayersLivesAdd(int count) {
+        return ChatColor.RED+"Vsetkym hracom bude pridanych " + count + " zivotov.";
+    }
 }

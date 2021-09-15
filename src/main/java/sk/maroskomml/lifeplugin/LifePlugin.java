@@ -1,12 +1,12 @@
 package sk.maroskomml.lifeplugin;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Server;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 
 public class LifePlugin extends JavaPlugin {
     private Config config = null;
@@ -34,6 +34,7 @@ public class LifePlugin extends JavaPlugin {
             @Override
             public void run() {
                 if(shouldAddLives(config)){
+                    getServer().broadcastMessage(Messages.globalAllPlayersLivesAdd(config.getLivesCount()));
                     playersHandler.addLives();
                     config.livesWasAdded();
                 }

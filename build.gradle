@@ -14,3 +14,23 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.8'
     compileOnly "io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT"
 }
+
+tasks.register('deployToLocal', Copy){
+    dependsOn 'jar'
+    from layout.buildDirectory.dir("libs")
+    include "*.jar"
+    into layout.projectDirectory.dir("server/plugins")
+}
+
+import org.apache.tools.ant.taskdefs.condition.Os
+task runLocal(type:Exec) {
+    workingDir 'server/'
+
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        commandLine 'cmd', '/c', 'java -Xms2G -Xmx2G -jar server.jar --nogui'
+    }else{
+        commandLine 'java -Xms2G -Xmx2G -jar server.jar --nogui'
+    }
+
+}
+

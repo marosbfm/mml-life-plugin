@@ -128,13 +128,13 @@ public class PlayersHandler {
     public void addLives() {
         players.forEach((s, playerLife) -> {
                     playerLife.addLife(config.getLivesCount());
-                    Player player = LifePlugin.getPlugin(LifePlugin.class).getServer().getPlayer(playerLife.getId());
+                    Player player = LifePlugin.getPlugin(LifePlugin.class).getServer().getPlayer(playerLife.getNick());
                     if(Objects.nonNull(player)){
                         player.sendMessage(Messages.myLife(playerLife.getLifeCount()));
+                        handleRespawn(player);
                     }
         }
         );
         store();
-        //TOOD Sprava ze boli pridane zivoty
     }
 }
