@@ -50,35 +50,42 @@ public class PluginCommandExecutor implements CommandExecutor {
                 String receiverNick = args[0];
                 int count = Integer.parseInt(args[1]);
                 if (playersHandler.knownPlayer(receiverNick)) {
-                    int senderLifeCount = playersHandler.getLifeCount(senderPlayer);
-                    if (senderLifeCount - count < 0) {
-                        count = senderLifeCount;
-                    }
-                    playersHandler.addLifeByNick(receiverNick, count);
-                    playersHandler.setLife(senderPlayer.getUniqueId().toString(), senderLifeCount - count);
 
-                    Server server = senderPlayer.getServer();
+                    if(sender.getName().equals(receiverNick)){
+                        sender.sendMessage(Messages.cantSentLiveToHimSelf());
 
-                    playersHandler.handleRespawn(senderPlayer);
-                    senderPlayer.sendMessage(Messages.lives(playersHandler.getLifeCount(senderPlayer)));
-                    if (playersHandler.isGhost(senderPlayer)) {
-                        senderPlayer.sendMessage(Messages.ghost());
-                        server.broadcastMessage(Messages.globalPlayerIsGhost(senderPlayer.getName()));
-                    }
+                    }else {
 
-
-                    Player receiver = server.getPlayer(receiverNick);
-                    if (Objects.nonNull(receiver)) {
-                        playersHandler.handleRespawn(receiver);
-                        receiver.sendMessage(Messages.playerSentLife(senderPlayer.getName(), count));
-                        receiver.sendMessage(Messages.lives(playersHandler.getLifeCount(receiver)));
-                        if(playersHandler.isGhost(receiver)){
-                            receiver.sendMessage(Messages.ghost());
-                            server.broadcastMessage(Messages.globalPlayerIsGhost(receiver.getName()));
+                        int senderLifeCount = playersHandler.getLifeCount(senderPlayer);
+                        if (senderLifeCount - count < 0) {
+                            count = senderLifeCount;
                         }
-                    }
+                        playersHandler.addLifeByNick(receiverNick, count);
+                        playersHandler.setLife(senderPlayer.getUniqueId().toString(), senderLifeCount - count);
 
-                    server.broadcastMessage(Messages.globalPlayerSentLife(senderPlayer.getName(), receiverNick, count));
+                        Server server = senderPlayer.getServer();
+
+                        playersHandler.handleRespawn(senderPlayer);
+                        senderPlayer.sendMessage(Messages.lives(playersHandler.getLifeCount(senderPlayer)));
+                        if (playersHandler.isGhost(senderPlayer)) {
+                            senderPlayer.sendMessage(Messages.ghost());
+                            server.broadcastMessage(Messages.globalPlayerIsGhost(senderPlayer.getName()));
+                        }
+
+
+                        Player receiver = server.getPlayer(receiverNick);
+                        if (Objects.nonNull(receiver)) {
+                            playersHandler.handleRespawn(receiver);
+                            receiver.sendMessage(Messages.playerSentLife(senderPlayer.getName(), count));
+                            receiver.sendMessage(Messages.lives(playersHandler.getLifeCount(receiver)));
+                            if (playersHandler.isGhost(receiver)) {
+                                receiver.sendMessage(Messages.ghost());
+                                server.broadcastMessage(Messages.globalPlayerIsGhost(receiver.getName()));
+                            }
+                        }
+
+                        server.broadcastMessage(Messages.globalPlayerSentLife(senderPlayer.getName(), receiverNick, count));
+                    }
                 } else {
                     sender.sendMessage(Messages.unknownPlayer(receiverNick));
 

@@ -62,4 +62,8 @@ public class Messages {
     public static String globalAllPlayersLivesAdd(int count) {
         return ChatColor.RED+"Vsetkym hracom bude pridanych " + count + " zivotov.";
     }
+
+    public static String cantSentLiveToHimSelf() {
+        return ChatColor.RED+"Nemozes poslat zivoty sam sebe!.";
+    }
 }

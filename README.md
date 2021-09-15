@@ -20,4 +20,4 @@ https://github.com/TechnoVisionDev/Spigot-Coding-Tutorial/blob/master/Episode_08
 
 java -Xms2G -Xmx2G -jar server.jar --nogui
 
-scp .\mml-life-plugin-1.0-SNAPSHOT.jar minecraft@185.91.116.101:.
+scp .\mml-life-plugin-1.0-SNAPSHOT.jar minecraft@185.91.116.101:~/minecraft-paperms-1.17.1/plugins/.
