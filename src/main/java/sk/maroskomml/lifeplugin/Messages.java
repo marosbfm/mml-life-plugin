@@ -70,4 +70,8 @@ public class Messages {
     public static String globalPlayerHasSetLife(String receiverNick, int count) {
         return ChatColor.RED+"Hrac ma nastavenych " + count + "zivotov.";
     }
+
+    public static String    useCrystal() {
+        return ChatColor.RED+"Pouzil si krtstal zivota.";
+    }
 }

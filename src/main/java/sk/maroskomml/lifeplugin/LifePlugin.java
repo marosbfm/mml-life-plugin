@@ -18,6 +18,9 @@ public class LifePlugin extends JavaPlugin {
         saveDefaultConfig();
         getConfig().options().copyDefaults(true);
         config = new Config(getConfig());
+
+        ItemManager.init();
+
         playersHandler = new PlayersHandler(config);
         playersHandler.reload();
         PluginEventsListener pluginEventsListener = new PluginEventsListener(config, playersHandler);
