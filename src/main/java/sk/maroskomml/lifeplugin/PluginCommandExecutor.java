@@ -5,8 +5,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 import org.jetbrains.annotations.NotNull;
 
+import java.security.Permissions;
 import java.util.Objects;
 
 public class PluginCommandExecutor implements CommandExecutor {
@@ -35,9 +37,45 @@ public class PluginCommandExecutor implements CommandExecutor {
                 mmlGiveLive(sender, args, commandName);
                 break;
             }
+            case "mmlsetlife": {
+                mmlSetLive(sender, args, commandName);
+                break;
+            }
             default:
         }
         return true;
+    }
+
+    private void mmlSetLive(CommandSender sender, String[] args, String commandName) {
+        try {
+            if (!(sender instanceof Player) || sender.hasPermission("op")) {
+                if (args.length != 2) {
+                    sender.sendMessage(Messages.errorCommandUsage(commandName));
+                }
+                String receiverNick = args[0];
+                int count = Integer.parseInt(args[1]);
+                if (playersHandler.knownPlayer(receiverNick)) {
+                    Server server = sender.getServer();
+                    playersHandler.setLifeByNick(receiverNick, count);
+                    Player receiver = server.getPlayer(receiverNick);
+                    if (Objects.nonNull(receiver)) {
+                        playersHandler.handleRespawn(receiver);
+                        receiver.sendMessage(Messages.lives(playersHandler.getLifeCount(receiver)));
+                        if (playersHandler.isGhost(receiver)) {
+                            receiver.sendMessage(Messages.ghost());
+                            server.broadcastMessage(Messages.globalPlayerIsGhost(receiver.getName()));
+                        }
+                    }
+
+                    server.broadcastMessage(Messages.globalPlayerHasSetLife(receiverNick, count));
+
+                } else
+                    sender.sendMessage(Messages.unknownPlayer(receiverNick));
+            }
+
+        } catch (Exception e) {
+            sender.sendMessage(Messages.errorCommandUsage(commandName));
+        }
     }
 
     private void mmlGiveLive(@NotNull CommandSender sender, @NotNull String[] args, String commandName) {
@@ -51,10 +89,10 @@ public class PluginCommandExecutor implements CommandExecutor {
                 int count = Integer.parseInt(args[1]);
                 if (playersHandler.knownPlayer(receiverNick)) {
 
-                    if(sender.getName().equals(receiverNick)){
+                    if (sender.getName().equals(receiverNick)) {
                         sender.sendMessage(Messages.cantSentLiveToHimSelf());
 
-                    }else {
+                    } else {
 
                         int senderLifeCount = playersHandler.getLifeCount(senderPlayer);
                         if (senderLifeCount - count < 0) {

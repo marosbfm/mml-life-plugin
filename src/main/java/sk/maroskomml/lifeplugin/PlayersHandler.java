@@ -137,4 +137,12 @@ public class PlayersHandler {
         );
         store();
     }
+
+    public void setLifeByNick(String receiverNick, int count) {
+        String playerId = nickPlayerIdMap.get(receiverNick);
+        if (players.containsKey(playerId)) {
+            players.get(playerId).setLife(count);
+            store();
+        }
+    }
 }

@@ -66,4 +66,8 @@ public class Messages {
     public static String cantSentLiveToHimSelf() {
         return ChatColor.RED+"Nemozes poslat zivoty sam sebe!.";
     }
+
+    public static String globalPlayerHasSetLife(String receiverNick, int count) {
+        return ChatColor.RED+"Hrac ma nastavenych " + count + "zivotov.";
+    }
 }

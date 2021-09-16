@@ -27,6 +27,7 @@ public class LifePlugin extends JavaPlugin {
         getCommand("mmlmylife").setExecutor(pluginCommandExecutor);
         getCommand("mmllife").setExecutor(pluginCommandExecutor);
         getCommand("mmlgivelife").setExecutor(pluginCommandExecutor);
+        getCommand("mmlsetlife").setExecutor(pluginCommandExecutor);
 
 
         BukkitScheduler scheduler = getServer().getScheduler();

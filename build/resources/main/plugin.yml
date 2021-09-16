@@ -14,5 +14,11 @@ commands:
     aliases: mmll
   mmlgivelife:
     description: Umozni dat svoj zivot inemu hracovi. Nemozes dat viac zivotov nez mas.
-    usage: /<command> [player] number
+    usage: /<command> [player] pocet
     aliases: mmlgl
+  mmlsetlife:
+    description: Nasetuje zivot hracovy.
+    usage: /<command> [player] pocet
+    aliases: mmlsl
+    permission: op
+    permission-message: Nemas pravo nasetovat zivoty
