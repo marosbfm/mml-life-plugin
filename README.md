@@ -76,6 +76,27 @@ alias: mmlsl
 
 permission: op
 
+## Krystal zivota
+
+Krystalom zivota si hrac moze pridat jeden zivot. Krystal sa pouzije tak ze ho hrac bude mat v ruke a spravi lavy klik mysou.
+
+### Recept
+
+![alt text](doc/img/life-crystal-recipe-resized.png)
+
+"ACA"
+
+"CBC"
+
+"ACA"
+
+- A  je material AMETHYST_SHARD
+- B  je material NETHERITE_INGOT
+- C  je material DIAMOND
+
+
+
+
 ## Discord 
 
 https://discord.com/invite/ScVuFsrr
