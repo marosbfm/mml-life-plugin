@@ -160,8 +160,13 @@ public class PlayersHandler {
         if (playerLife.isGhost()) {
             player.sendMessage(Messages.ghost());
             player.showTitle(Title.title(Messages.ghost(), Component.empty()));
-            player.getServer().broadcast(
-                    Messages.globalPlayerIsGhost(player.getName()));
+            player.getServer().broadcast(Messages.globalPlayerIsGhost(player.getName()));
+        }else if(playerLife.isCameToLife()){
+            player.sendMessage(Messages.cameToLife(playerLife.getLifeCount()));
+            player.showTitle(Title.title(Messages.titleCameToLife(), Component.empty()));
+            player.getServer().broadcast(Messages.globalCameToLife(player.getName()));
+        }else if(playerLife.getLifeCount() == 1){
+            player.sendMessage(Messages.warningLife(playerLife.getLifeCount()));
         }
     }
 

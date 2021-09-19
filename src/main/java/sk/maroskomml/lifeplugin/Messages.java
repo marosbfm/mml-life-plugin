@@ -4,7 +4,10 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.util.RGBLike;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.entity.Player;
 
 public class Messages {
@@ -154,6 +157,29 @@ public class Messages {
     public static TextComponent errorDoNotHavePermission(String commandName) {
         return Component.text("Nemas pravo pouzit prikaz /" + commandName)
                 .color(NamedTextColor.RED);
+    }
+
+    public static TextComponent warningLife(int lifeCount) {
+        return Component.text("Pozor mas uz len " + lifeCount + " " + wordLife(lifeCount))
+                .color(TextColor.color(0xFFA500));
+    }
+
+    public static TextComponent cameToLife(int lifeCount) {
+        return Component.text("Vitaj mezdi zivimi!").color(TextColor.color(NamedTextColor.BLUE))
+                .append(Component.text(" Mas " + lifeCount + " " + wordLife(lifeCount)));
+    }
+
+    public static TextComponent titleCameToLife() {
+        return Component.text("Vitaj mezdi zivimi!").color(TextColor.color(NamedTextColor.BLUE));
+    }
+
+    public static TextComponent globalCameToLife(String playerNick) {
+        return Component.text("Hrac ").color(NamedTextColor.GRAY)
+                .append(Component.text(playerNick).color(NamedTextColor.GREEN))
+                .append(Component.text(" ").color(NamedTextColor.GRAY))
+                .append(Component.text("OZIL!!!")
+                        .color(NamedTextColor.BLUE)
+                        .decoration(TextDecoration.BOLD,true));
     }
 
     private static String wordLife(int count) {

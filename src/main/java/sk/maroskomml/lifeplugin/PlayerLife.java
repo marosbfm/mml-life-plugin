@@ -7,6 +7,7 @@ public class PlayerLife {
     private final String id;
     private final String nick;
     private int lifeCount;
+    private boolean cameToLife = false;
 
     public PlayerLife(Config config, Player player) {
         lifeCount = config.getLivesCount();
@@ -26,22 +27,29 @@ public class PlayerLife {
         return lifeCount;
     }
 
-    public void setLife(int count) {
+    public void setLife(int count){
+        if(isGhost() && count > 0){
+            cameToLife = true;
+        }
         lifeCount = count;
     }
 
     public void addLife(int count) {
-        lifeCount = lifeCount + count;
-    }
-
-    public void decreaseLife() {
-        if(lifeCount > 0){
-            lifeCount--;
+        if(isGhost() && count > 0){
+            cameToLife = true;
         }
+        lifeCount = lifeCount + count;
     }
 
     public boolean isGhost() {
         return lifeCount == 0;
     }
 
+    public boolean isCameToLife() {
+        return cameToLife;
+    }
+
+    public void setCameToLife(boolean cameToLife) {
+        this.cameToLife = cameToLife;
+    }
 }
