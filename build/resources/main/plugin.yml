@@ -4,21 +4,25 @@ author: maroskomml
 main: sk.maroskomml.lifeplugin.LifePlugin
 api-version: 1.17
 commands:
+  mmlhelp:
+    description: Napoveda pre mml life plugin.
+    usage: /<command>
+    aliases: mmlh
   mmlmylife:
-    description: Zobrazi kolko mas zivota
+    description: Zobrazi kolko mas zivota..
     usage: /<command>
     aliases: mmlml
   mmllife:
-    description: Zobrazi kolko zivota ma hrac
+    description: Zobrazi kolko zivota ma hrac.
     usage: /<command> [player]
     aliases: mmll
   mmlgivelife:
-    description: Umozni dat svoj zivot inemu hracovi. Nemozes dat viac zivotov nez mas.
+    description: Umozni dat svoj zivot inemu hracovi. Nemozes dat viac zivotov nez mas. Pocet musi byt cele cislo vacsie alebo rovne 0.
     usage: /<command> [player] pocet
     aliases: mmlgl
   mmlsetlife:
-    description: Nasetuje zivot hracovy.
+    description: Nasetuje zivot hracovy. Pocet musi byt cele cislo vacsie alebo rovne 0.
     usage: /<command> [player] pocet
     aliases: mmlsl
     permission: op
-    permission-message: Nemas pravo nasetovat zivoty
+    permission-message: Nemas pravo nasetovat zivoty.

@@ -41,14 +41,14 @@ spustit prikaz **reload**) vznikne v korenovom adresari servera subor **plugins/
 ## Prikazy
 
 ### mmlmylife
-Zobrazi kolko ma hrac zivota
+Zobrazi kolko ma hrac zivota.
 
 /mmlmylife
 
 alias: mmlml
 
 ### mmllife
-Zobrazi kolko zivota ma hrac uvedeny ako parameter prikazu
+Zobrazi kolko zivota ma hrac uvedeny ako parameter prikazu.
 
 /mmllife [player]
 
@@ -56,6 +56,7 @@ alias: mmll
 
 ### mmlgivelife:
 Umozni aby hrac dal svoj zivot inemu hracovi. Hrac nemoze dat viac zivotov nez ma. Ak ostane hracovi 0 zivota stava sa duchom.
+Pocet musi byt cele cislo vacsie alebo rovne 0.
 
 /mmlgivelife [player] pocet
 
@@ -66,7 +67,7 @@ alias: mmlgl
 
 ### mmlsetlife:
 
-OP nasetuje zivot hracovi.
+OP nasetuje zivot hracovi. Pocet musi byt cele cislo vacsie alebo rovne 0.
 
 /mmlsetlife [player] pocet
 
@@ -75,6 +76,13 @@ pocet - cislo > 0
 alias: mmlsl
 
 permission: op
+
+### mmlhelp
+Napoveda ku pluginu Mml Life.
+
+/mmlhelp
+
+alias: mmlh
 
 ## Krystal zivota
 

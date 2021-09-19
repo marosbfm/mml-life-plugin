@@ -13,6 +13,12 @@ import java.util.Objects;
 
 public class Config {
 
+    private static final String MML_LIFE_PLUGIN_LIVES_COUNT = "mml-life-plugin.lives-count";
+    private static final String MML_LIFE_PLUGIN_RESET_INTERVAL_AMOUNT = "mml-life-plugin.reset-interval.amount";
+    private static final String MML_LIFE_PLUGIN_RESET_INTERVAL_UNIT = "mml-life-plugin.reset-interval.unit";
+    private static final String MML_LIFE_PLUGIN_RESET_INTERVAL_TS = "mml-life-plugin.reset-interval.ts";
+    private static final String MML_LIFE_PLUGIN_PLAYERS = "mml-life-plugin.players";
+
     private final FileConfiguration fileConfiguration;
 
     private final int livesCount;
@@ -28,21 +34,17 @@ public class Config {
     public Config(@NotNull FileConfiguration config) {
         fileConfiguration = config;
         livesCount = Integer.parseInt(
-                Objects.requireNonNull(config.getString("mml-life-plugin.lives-count"))
+                Objects.requireNonNull(config.getString(MML_LIFE_PLUGIN_LIVES_COUNT))
         );
         resetIntervalAmount = Integer.parseInt(
-                Objects.requireNonNull(config.getString("mml-life-plugin.reset-interval.amount"))
+                Objects.requireNonNull(config.getString(MML_LIFE_PLUGIN_RESET_INTERVAL_AMOUNT))
         );
-        resetIntervalUnit = Objects.requireNonNull(config.getString("mml-life-plugin.reset-interval.unit"));
-        long ts = config.getLong("mml-life-plugin.reset-interval.ts", 0L);
+        resetIntervalUnit = Objects.requireNonNull(config.getString(MML_LIFE_PLUGIN_RESET_INTERVAL_UNIT));
+        long ts = config.getLong(MML_LIFE_PLUGIN_RESET_INTERVAL_TS, 0L);
         if(ts == 0L){
             ts = Instant.now().getEpochSecond();
         }
         resetTs = ts;
-    }
-
-    public FileConfiguration getFileConfiguration() {
-        return fileConfiguration;
     }
 
     public int getLivesCount() {
@@ -61,13 +63,18 @@ public class Config {
         return resetTs;
     }
 
-    public void storePlayers(Map<String, PlayerLife> players) {
-        fileConfiguration.set("mml-life-plugin.players", gson.toJson(players));
+    public void updateResetIntervalTs() {
+        fileConfiguration.set(MML_LIFE_PLUGIN_RESET_INTERVAL_TS, Instant.now().getEpochSecond());
         LifePlugin.getPlugin(LifePlugin.class).saveConfig();
     }
 
-    public Map<String, PlayerLife> reloadPlayers() {
-        String json = fileConfiguration.getString("mml-life-plugin.players");
+    public void storePlayers(Map<String, PlayerLife> players) {
+        fileConfiguration.set(MML_LIFE_PLUGIN_PLAYERS, gson.toJson(players));
+        LifePlugin.getPlugin(LifePlugin.class).saveConfig();
+    }
+
+    public Map<String, PlayerLife> readPlayers() {
+        String json = fileConfiguration.getString(MML_LIFE_PLUGIN_PLAYERS);
         if (Objects.nonNull(json)) {
             return gson.fromJson(
                     json,
@@ -85,13 +92,7 @@ public class Config {
                 ", livesCount=" + livesCount +
                 ", resetIntervalAmount=" + resetIntervalAmount +
                 ", resetIntervalUnit='" + resetIntervalUnit + '\'' +
-                ", playersMapType=" + playersMapType +
-                ", tsLastReset=" + resetTs +
+                ", resetTs=" + resetTs +
                 '}';
-    }
-
-    public void livesWasAdded() {
-        fileConfiguration.set("mml-life-plugin.reset-interval.ts", Instant.now().getEpochSecond());
-        LifePlugin.getPlugin(LifePlugin.class).saveConfig();
     }
 }
