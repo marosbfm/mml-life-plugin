@@ -91,6 +91,7 @@ public class PlayersHandler {
 
                     if (Objects.nonNull(player)) {
                         handleLifeChange(player,liveCountToAdd);
+                        reflectPlayerGameState(player);
                     }else {
                         changePlayerLife(playerLife, liveCountToAdd);
                     }
@@ -103,6 +104,7 @@ public class PlayersHandler {
 
         if (Objects.nonNull(receiver)) {
             handleLifeChange(receiver,count,true);
+            reflectPlayerGameState(receiver);
         }else if(players.containsKey(playerId)){
             changePlayerLife(players.get(playerId),count, true);
         }
@@ -113,6 +115,7 @@ public class PlayersHandler {
 
         if (Objects.nonNull(receiver)) {
             handleLifeChange(receiver,count);
+            reflectPlayerGameState(receiver);
         }else if(players.containsKey(playerId)){
             changePlayerLife(players.get(playerId),count);
         }
