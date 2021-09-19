@@ -6,8 +6,6 @@ import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
-import net.kyori.adventure.util.RGBLike;
-import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.entity.Player;
 
 public class Messages {
