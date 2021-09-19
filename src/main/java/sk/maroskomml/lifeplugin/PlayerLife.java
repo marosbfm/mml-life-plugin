@@ -28,6 +28,9 @@ public class PlayerLife {
     }
 
     public void setLife(int count){
+        if(count < 0){
+            count = 0;
+        }
         if(isGhost() && count > 0){
             cameToLife = true;
         }
@@ -39,6 +42,9 @@ public class PlayerLife {
             cameToLife = true;
         }
         lifeCount = lifeCount + count;
+        if(lifeCount < 0){
+            lifeCount = 0;
+        }
     }
 
     public boolean isGhost() {

@@ -165,6 +165,8 @@ public class PlayersHandler {
             player.sendMessage(Messages.cameToLife(playerLife.getLifeCount()));
             player.showTitle(Title.title(Messages.titleCameToLife(), Component.empty()));
             player.getServer().broadcast(Messages.globalCameToLife(player.getName()));
+            playerLife.setCameToLife(false);
+            store();
         }else if(playerLife.getLifeCount() == 1){
             player.sendMessage(Messages.warningLife(playerLife.getLifeCount()));
         }
