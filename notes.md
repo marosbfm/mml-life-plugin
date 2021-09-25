@@ -3,11 +3,12 @@
 
 Test server
 
+seed 8188885560474632936
 185.91.116.101
 
 
 
-seed 8188885560474632936
+
 
 https://paper.readthedocs.io/en/latest/
 
@@ -23,7 +24,7 @@ remote debug
 
 https://www.spigotmc.org/wiki/intellij-debug-your-plugin/
 
-scp .\mml-life-plugin-1.0-SNAPSHOT.jar minecraft@185.91.116.101:~/minecraft-paperms-1.17.1/plugins/.
+scp .\mml-life-plugin-1.0.0.jar minecraft@185.91.116.101:~/minecraft-paperms-1.17.1/plugins/mml-life-plugin.jar
 
 
 
