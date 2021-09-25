@@ -23,7 +23,7 @@ OP moze nastavit pocet zivotov lubovolnemu hracovi. Ak nastavi nejakemu hracovi 
 
 ## Instalacia pluginu 
 
-**mml-life-plugin-1.0.0.jar** je potrebne nakopirovat do adresara **plugins** na serveri.
+**[mml-life-plugin-1.0.0.jar](https://github.com/marosbfm/mml-life-plugin/releases/download/v1.0.0/mml-life-plugin-1.0.0.jar)** je potrebne nakopirovat do adresara **plugins** na serveri.
 
 ## Konfiguracia pluginu
 
