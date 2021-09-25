@@ -14,57 +14,58 @@ import java.util.Objects;
 public class Config {
 
     private static final String MML_LIFE_PLUGIN_LIVES_COUNT = "mml-life-plugin.lives-count";
-    private static final String MML_LIFE_PLUGIN_RESET_INTERVAL_AMOUNT = "mml-life-plugin.reset-interval.amount";
-    private static final String MML_LIFE_PLUGIN_RESET_INTERVAL_UNIT = "mml-life-plugin.reset-interval.unit";
-    private static final String MML_LIFE_PLUGIN_RESET_INTERVAL_TS = "mml-life-plugin.reset-interval.ts";
+    private static final String MML_LIFE_PLUGIN_LIFE_ADDING_CYCLE_AMOUNT = "mml-life-plugin.life-adding-cycle.amount";
+    private static final String MML_LIFE_PLUGIN_LIFE_ADDING_CYCLE_UNIT = "mml-life-plugin.life-adding-cycle.unit";
+    private static final String MML_LIFE_PLUGIN_LIFE_ADDING_CYCLE_TS = "mml-life-plugin.life-adding-cycle.ts";
     private static final String MML_LIFE_PLUGIN_PLAYERS = "mml-life-plugin.players";
 
     private final FileConfiguration fileConfiguration;
 
     private final int livesCount;
-    private final int resetIntervalAmount;
-    private final String resetIntervalUnit;
+    private final int lifeAddingCycleAmount;
+    private final String lifeAddingCycleUnit;
 
     private final Gson gson = new Gson();
     private final Type playersMapType = new TypeToken<HashMap<String, PlayerLife>>() {
     }.getType();
 
-    private final long resetTs;
+    private final long lastLifeAddingCycleTs;
 
     public Config(@NotNull FileConfiguration config) {
         fileConfiguration = config;
         livesCount = Integer.parseInt(
                 Objects.requireNonNull(config.getString(MML_LIFE_PLUGIN_LIVES_COUNT))
         );
-        resetIntervalAmount = Integer.parseInt(
-                Objects.requireNonNull(config.getString(MML_LIFE_PLUGIN_RESET_INTERVAL_AMOUNT))
+        lifeAddingCycleAmount = Integer.parseInt(
+                Objects.requireNonNull(config.getString(MML_LIFE_PLUGIN_LIFE_ADDING_CYCLE_AMOUNT))
         );
-        resetIntervalUnit = Objects.requireNonNull(config.getString(MML_LIFE_PLUGIN_RESET_INTERVAL_UNIT));
-        long ts = config.getLong(MML_LIFE_PLUGIN_RESET_INTERVAL_TS, 0L);
+        lifeAddingCycleUnit = Objects.requireNonNull(config.getString(MML_LIFE_PLUGIN_LIFE_ADDING_CYCLE_UNIT));
+        long ts = config.getLong(MML_LIFE_PLUGIN_LIFE_ADDING_CYCLE_TS, 0L);
         if(ts == 0L){
-            ts = Instant.now().getEpochSecond();
+            updateResetIntervalTs();
+            ts = config.getLong(MML_LIFE_PLUGIN_LIFE_ADDING_CYCLE_TS, 0L);
         }
-        resetTs = ts;
+        lastLifeAddingCycleTs = ts;
     }
 
     public int getLivesCount() {
         return livesCount;
     }
 
-    public int getResetIntervalAmount() {
-        return resetIntervalAmount;
+    public int getLifeAddingCycleAmount() {
+        return lifeAddingCycleAmount;
     }
 
-    public String getResetIntervalUnit() {
-        return resetIntervalUnit;
+    public String getLifeAddingCycleUnit() {
+        return lifeAddingCycleUnit;
     }
 
-    public long getResetTs() {
-        return resetTs;
+    public long getLastLifeAddingCycleTs() {
+        return lastLifeAddingCycleTs;
     }
 
     public void updateResetIntervalTs() {
-        fileConfiguration.set(MML_LIFE_PLUGIN_RESET_INTERVAL_TS, Instant.now().getEpochSecond());
+        fileConfiguration.set(MML_LIFE_PLUGIN_LIFE_ADDING_CYCLE_TS, Instant.now().getEpochSecond());
         LifePlugin.getPlugin(LifePlugin.class).saveConfig();
     }
 
@@ -90,9 +91,9 @@ public class Config {
         return "Config{" +
                 "fileConfiguration=" + fileConfiguration +
                 ", livesCount=" + livesCount +
-                ", resetIntervalAmount=" + resetIntervalAmount +
-                ", resetIntervalUnit='" + resetIntervalUnit + '\'' +
-                ", resetTs=" + resetTs +
+                ", lifeAddingCycleAmount=" + lifeAddingCycleAmount +
+                ", lifeAddingCycleUnit='" + lifeAddingCycleUnit + '\'' +
+                ", lastLifeAddingCycleTs=" + lastLifeAddingCycleTs +
                 '}';
     }
 }

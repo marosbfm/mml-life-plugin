@@ -26,3 +26,7 @@ commands:
     aliases: mmlsl
     permission: op
     permission-message: Nemas pravo nasetovat zivoty.
+  mmlcycleinfo:
+    description: Zobrazi informaciu o ozivovacom cykle. Kedy bol naposledy, kedy bude najblyssie a kolko zivotov bude pridanych.
+    usage: /<command>
+    aliases: mmlci

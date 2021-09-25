@@ -1,5 +1,5 @@
 mml-life-plugin:
   lives-count: 5
-  reset-interval:
+  life-adding-cycle:
     amount: 7
     unit: DAYS # MINUTES HOURS DAYS WEEKS

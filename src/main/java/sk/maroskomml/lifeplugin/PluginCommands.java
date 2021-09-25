@@ -7,6 +7,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 public class PluginCommands implements CommandExecutor {
@@ -16,6 +21,7 @@ public class PluginCommands implements CommandExecutor {
     public static final String COMMAND_LIFE = "mmllife";
     public static final String COMMAND_GIVE_LIFE = "mmlgivelife";
     public static final String COMMAND_SET_LIFE = "mmlsetlife";
+    public static final String COMMAND_CYCLE_INFO="mmlcycleinfo";
 
     private final Config config;
     private final PlayersHandler playersHandler;
@@ -34,6 +40,7 @@ public class PluginCommands implements CommandExecutor {
             case COMMAND_LIFE -> mmlLife(sender, args, commandName);
             case COMMAND_GIVE_LIFE -> mmlGiveLive(sender, args, commandName);
             case COMMAND_SET_LIFE -> mmlSetLive(sender, args, commandName);
+            case COMMAND_CYCLE_INFO -> mmlCycleInfo(sender);
             default -> false;
         };
     }
@@ -119,6 +126,23 @@ public class PluginCommands implements CommandExecutor {
             result = true;
         }
         return result;
+    }
+
+    private boolean mmlCycleInfo(CommandSender sender) {
+        int livesCount = config.getLivesCount();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").withZone(ZoneId.from(ZoneOffset.ofHours(1)));
+        Instant lastLifeAddingCycle = Instant.ofEpochSecond(config.getLastLifeAddingCycleTs());
+        Instant nextLifeAddingCycle = lastLifeAddingCycle.plus(
+                config.getLifeAddingCycleAmount(),
+                ChronoUnit.valueOf(config.getLifeAddingCycleUnit())
+        );
+
+        sender.sendMessage(Messages.cycleInfo(
+                livesCount,
+                formatter.format(lastLifeAddingCycle),
+                formatter.format(nextLifeAddingCycle)
+        ));
+        return true;
     }
 
     private boolean checkOnlyPlayerCommand(CommandSender sender, String commandName) {

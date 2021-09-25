@@ -44,6 +44,7 @@ public class LifePlugin extends JavaPlugin {
         setCommandExecutor(PluginCommands.COMMAND_LIFE, pluginCommands);
         setCommandExecutor(PluginCommands.COMMAND_GIVE_LIFE, pluginCommands);
         setCommandExecutor(PluginCommands.COMMAND_SET_LIFE, pluginCommands);
+        setCommandExecutor(PluginCommands.COMMAND_CYCLE_INFO, pluginCommands);
     }
     
     private void setCommandExecutor(String commandName, CommandExecutor commandExecutor){
@@ -66,10 +67,10 @@ public class LifePlugin extends JavaPlugin {
     }
 
     private boolean shouldAddLives(Config config) {
-        Instant reset = Instant.ofEpochSecond(config.getResetTs());
-        Instant next = reset.plus(
-                config.getResetIntervalAmount(),
-                ChronoUnit.valueOf(config.getResetIntervalUnit())
+        Instant last = Instant.ofEpochSecond(config.getLastLifeAddingCycleTs());
+        Instant next = last.plus(
+                config.getLifeAddingCycleAmount(),
+                ChronoUnit.valueOf(config.getLifeAddingCycleUnit())
         );
         return Instant.now().isAfter(next);
     }

@@ -23,7 +23,7 @@ OP moze nastavit pocet zivotov lubovolnemu hracovi. Ak nastavi nejakemu hracovi 
 
 ## Instalacia pluginu 
 
-**[mml-life-plugin-1.0.0.jar](https://github.com/marosbfm/mml-life-plugin/releases/download/v1.0.0/mml-life-plugin-1.0.0.jar)** je potrebne nakopirovat do adresara **plugins** na serveri.
+**[mml-life-plugin-1.0.1.jar](https://github.com/marosbfm/mml-life-plugin/releases/download/v1.0.1/mml-life-plugin-1.0.1.jar)** je potrebne nakopirovat do adresara **plugins** na serveri.
 
 ## Konfiguracia pluginu
 
@@ -32,7 +32,7 @@ spustit prikaz **reload**) vznikne v korenovom adresari servera subor **plugins/
 
 - mml-life-plugin: 
   - lives-count: 5 - pocet zivotov ktore hrac obdrzi pri starte servera a taktiez pri *ozivovacom intervale*
-  - reset-interval: - konfiguracia *ozivovacieho intervalu* - po akom casom intervale sa maju pripocitat zivoty uvedene v parametre lives-count vsetkym hracom
+  - life-adding-cycle: - konfiguracia *ozivovacieho cyklu* - po akom casom intervale sa maju pripocitat zivoty uvedene v parametre lives-count vsetkym hracom
     - amount: 7 - pocet
     - unit: DAYS - jednotka - mozne nastavit nasledujuce MINUTES HOURS DAYS WEEKS 
     - ts: 1631822104 - [UNIX time stamp](https://www.unixtimestamp.com/) (pocet sekund uplynutych od 1.1.1970 UTC) od posledneho *ozivovania*
@@ -43,14 +43,14 @@ spustit prikaz **reload**) vznikne v korenovom adresari servera subor **plugins/
 ### mmlmylife
 Zobrazi kolko ma hrac zivota.
 
-/mmlmylife
+**/mmlmylife**
 
 alias: mmlml
 
 ### mmllife
 Zobrazi kolko zivota ma hrac uvedeny ako parameter prikazu.
 
-/mmllife [player]
+**/mmllife [player]**
 
 alias: mmll
 
@@ -58,7 +58,7 @@ alias: mmll
 Umozni aby hrac dal svoj zivot inemu hracovi. Hrac nemoze dat viac zivotov nez ma. Ak ostane hracovi 0 zivota stava sa duchom.
 Pocet musi byt cele cislo vacsie alebo rovne 0.
 
-/mmlgivelife [player] pocet
+**/mmlgivelife [player] pocet**
 
 pocet - cislo > 0
 
@@ -69,7 +69,7 @@ alias: mmlgl
 
 OP nasetuje zivot hracovi. Pocet musi byt cele cislo vacsie alebo rovne 0.
 
-/mmlsetlife [player] pocet
+**/mmlsetlife [player] pocet**
 
 pocet - cislo > 0
 
@@ -77,10 +77,18 @@ alias: mmlsl
 
 permission: op
 
+### mmlcycleinfo
+
+Zobrazi informaciu o ozivovacom cykle. Kedy bol naposledy, kedy bude najblyssie a kolko zivotov bude pridanych.
+
+**/mmlcycleinfo**
+
+alias: mmlci
+
 ### mmlhelp
 Napoveda ku pluginu Mml Life.
 
-/mmlhelp
+**/mmlhelp**
 
 alias: mmlh
 
