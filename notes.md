@@ -4,15 +4,15 @@
 Test server
 
 seed 8188885560474632936
+
 185.91.116.101
 
-
-
-
+https://papermc.io/
 
 https://paper.readthedocs.io/en/latest/
 
 https://bukkit.fandom.com/wiki/CraftBukkit_Commands
+
 https://bukkit.fandom.com/wiki/Plugin_Tutorial_(Eclipse)#Commands
 
 https://github.com/TechnoVisionDev/Spigot-Coding-Tutorial/blob/master/Episode_08/Tutorial.java

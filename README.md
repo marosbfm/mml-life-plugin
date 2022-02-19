@@ -3,11 +3,11 @@
 Tento plugin riesi zivoty hracov. 
 
 Je urceny pre [papermc server](https://papermc.io/) verzie 
-[1.17.1](https://papermc.io/api/v2/projects/paper/versions/1.17.1/builds/266/downloads/paper-1.17.1-266.jar) 
+[1.18.1](https://papermc.io/api/v2/projects/paper/versions/1.18.1/builds/203/downloads/paper-1.18.1-203.jar) 
 
 Plugin je mozne otestovat na serveri **185.91.116.101**
 
-Hrac pri provom prihlaseni sa na server obdrzi **urcity pocet zivotov** (je to zavisle od konfiguracie pluginu na serveri,
+Hrac pri prvom prihlaseni sa na server obdrzi **urcity pocet zivotov** (je to zavisle od konfiguracie pluginu na serveri,
 defaultna hodnota je **5**).
 Po kazdej smrti sa hracovi **odpocita jeden zivot**. Ked hrac strati vsetky zivoty stava sa **duchom**.
 
@@ -23,7 +23,7 @@ OP moze nastavit pocet zivotov lubovolnemu hracovi. Ak nastavi nejakemu hracovi 
 
 ## Instalacia pluginu 
 
-**[mml-life-plugin-1.0.1.jar](https://github.com/marosbfm/mml-life-plugin/releases/download/v1.0.1/mml-life-plugin-1.0.1.jar)** je potrebne nakopirovat do adresara **plugins** na serveri.
+**[mml-life-plugin-1.1.0.jar](https://github.com/marosbfm/mml-life-plugin/releases/download/v1.1.0/mml-life-plugin-1.1.0.jar)** je potrebne nakopirovat do adresara **plugins** na serveri.
 
 ## Konfiguracia pluginu
 

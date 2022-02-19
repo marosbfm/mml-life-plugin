@@ -1,9 +1,14 @@
 plugins {
     id 'java'
 }
-
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 group 'org.example'
-version '1.0.1'
+version '1.1.0'
+
 
 repositories {
     mavenCentral()
@@ -11,8 +16,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.google.code.gson:gson:2.8.8'
-    compileOnly "io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT"
+    implementation 'com.google.code.gson:gson:2.9.0'
+    compileOnly 'io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT'
 }
 
 tasks.register('deployToLocal', Copy){
