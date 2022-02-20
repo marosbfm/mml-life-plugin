@@ -12,6 +12,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Objects;
 
 public class PluginCommands implements CommandExecutor {
@@ -22,6 +23,7 @@ public class PluginCommands implements CommandExecutor {
     public static final String COMMAND_GIVE_LIFE = "mmlgivelife";
     public static final String COMMAND_SET_LIFE = "mmlsetlife";
     public static final String COMMAND_CYCLE_INFO="mmlcycleinfo";
+    public static final String COMMAND_TOP_SCORE = "mmltopscore";
 
     private final Config config;
     private final PlayersHandler playersHandler;
@@ -41,8 +43,15 @@ public class PluginCommands implements CommandExecutor {
             case COMMAND_GIVE_LIFE -> mmlGiveLive(sender, args, commandName);
             case COMMAND_SET_LIFE -> mmlSetLive(sender, args, commandName);
             case COMMAND_CYCLE_INFO -> mmlCycleInfo(sender);
+            case COMMAND_TOP_SCORE -> mmlTopScore(sender,args,commandName);
             default -> false;
         };
+    }
+
+    private boolean mmlTopScore(CommandSender sender, String[] args, String commandName) {
+        List<PlayerEntity> topList = playersHandler.getTopScore();
+        sender.sendMessage(Messages.top(topList));
+        return true;
     }
 
     private boolean mmlHelp(CommandSender sender) {

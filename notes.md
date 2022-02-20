@@ -39,3 +39,8 @@ screen -r minecraft
 killall screen - ukonci vsetky screeny
 
 https://linuxize.com/post/how-to-use-linux-screen/
+
+https://linuxize.com/post/how-to-install-mysql-on-ubuntu-18-04/
+
+widows dev
+https://dev.mysql.com/downloads/installer/

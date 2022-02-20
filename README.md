@@ -50,7 +50,7 @@ alias: mmlml
 ### mmllife
 Zobrazi kolko zivota ma hrac uvedeny ako parameter prikazu.
 
-**/mmllife [player]**
+**/mmllife [playerEntity]**
 
 alias: mmll
 
@@ -58,7 +58,7 @@ alias: mmll
 Umozni aby hrac dal svoj zivot inemu hracovi. Hrac nemoze dat viac zivotov nez ma. Ak ostane hracovi 0 zivota stava sa duchom.
 Pocet musi byt cele cislo vacsie alebo rovne 0.
 
-**/mmlgivelife [player] pocet**
+**/mmlgivelife [playerEntity] pocet**
 
 pocet - cislo > 0
 
@@ -69,7 +69,7 @@ alias: mmlgl
 
 OP nasetuje zivot hracovi. Pocet musi byt cele cislo vacsie alebo rovne 0.
 
-**/mmlsetlife [player] pocet**
+**/mmlsetlife [playerEntity] pocet**
 
 pocet - cislo > 0
 

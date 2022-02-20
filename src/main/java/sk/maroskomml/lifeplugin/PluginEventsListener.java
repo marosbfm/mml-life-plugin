@@ -50,4 +50,25 @@ public class PluginEventsListener implements Listener {
 
         }
     }
+
+    @EventHandler
+    public void onPlayerStatisticIncrementEvent(PlayerStatisticIncrementEvent event) {
+        playersHandler.handleStatisticIncrementEvent(event.getPlayer(),
+                event);
+    }
+
+    @EventHandler
+    public void onPlayerQuitEvent(PlayerQuitEvent event){
+        playersHandler.handleQuitEvent(event.getPlayer());
+    }
+
+    @EventHandler
+    public void onPlayerKickEvent(PlayerKickEvent event){
+        playersHandler.handleKickEvent(event.getPlayer());
+    }
+
+    @EventHandler
+    public void onPlayerExpChangeEvent(PlayerExpChangeEvent event){
+        playersHandler.handleExpChangeEvent(event.getPlayer(),event);
+    }
 }

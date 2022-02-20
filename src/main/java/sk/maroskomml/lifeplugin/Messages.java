@@ -8,6 +8,8 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class Messages {
     public static TextComponent consolePluginEnabled() {
         return Component.text("MML Life Plugin je pripraveny.").color(NamedTextColor.GREEN);
@@ -230,4 +232,17 @@ public class Messages {
         };
     }
 
+    public static TextComponent top(List<PlayerEntity> topList) {
+        TextComponent textComponent = Component.text("Top hraci na servery: \n").color(NamedTextColor.GRAY);
+        for (int i = 1; i <= topList.size(); i++) {
+            PlayerEntity playerEntity = topList.get(i - 1);
+            textComponent = textComponent.append(Component.text(i + ". ").color(NamedTextColor.DARK_RED))
+                    .append(Component.text(playerEntity.getNick() + " ").color(NamedTextColor.DARK_GREEN))
+                    .append(Component.text(" score:  ").color(NamedTextColor.GRAY))
+                    .append(Component.text(playerEntity.getScore() + " ").color(NamedTextColor.GOLD))
+                    .append(Component.text(" zabitych hracov:  ").color(NamedTextColor.GRAY))
+                    .append(Component.text(playerEntity.getKilledPlayers() + "\n ").color(NamedTextColor.GOLD));
+        }
+        return textComponent;
+    }
 }

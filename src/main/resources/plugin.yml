@@ -30,3 +30,7 @@ commands:
     description: Zobrazi informaciu o ozivovacom cykle. Kedy bol naposledy, kedy bude najblyssie a kolko zivotov bude pridanych.
     usage: /<command>
     aliases: mmlci
+  mmltopscore:
+    description: Zobrazi top hracov.
+    usage: /<command>
+    aliases: mmlts

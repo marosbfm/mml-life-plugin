@@ -17,17 +17,12 @@ public class Config {
     private static final String MML_LIFE_PLUGIN_LIFE_ADDING_CYCLE_AMOUNT = "mml-life-plugin.life-adding-cycle.amount";
     private static final String MML_LIFE_PLUGIN_LIFE_ADDING_CYCLE_UNIT = "mml-life-plugin.life-adding-cycle.unit";
     private static final String MML_LIFE_PLUGIN_LIFE_ADDING_CYCLE_TS = "mml-life-plugin.life-adding-cycle.ts";
-    private static final String MML_LIFE_PLUGIN_PLAYERS = "mml-life-plugin.players";
 
     private final FileConfiguration fileConfiguration;
 
     private final int livesCount;
     private final int lifeAddingCycleAmount;
     private final String lifeAddingCycleUnit;
-
-    private final Gson gson = new Gson();
-    private final Type playersMapType = new TypeToken<HashMap<String, PlayerLife>>() {
-    }.getType();
 
     private final long lastLifeAddingCycleTs;
 
@@ -67,23 +62,6 @@ public class Config {
     public void updateResetIntervalTs() {
         fileConfiguration.set(MML_LIFE_PLUGIN_LIFE_ADDING_CYCLE_TS, Instant.now().getEpochSecond());
         LifePlugin.getPlugin(LifePlugin.class).saveConfig();
-    }
-
-    public void storePlayers(Map<String, PlayerLife> players) {
-        fileConfiguration.set(MML_LIFE_PLUGIN_PLAYERS, gson.toJson(players));
-        LifePlugin.getPlugin(LifePlugin.class).saveConfig();
-    }
-
-    public Map<String, PlayerLife> readPlayers() {
-        String json = fileConfiguration.getString(MML_LIFE_PLUGIN_PLAYERS);
-        if (Objects.nonNull(json)) {
-            return gson.fromJson(
-                    json,
-                    playersMapType
-            );
-        } else {
-            return new HashMap<>();
-        }
     }
 
     @Override

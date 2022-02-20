@@ -4,6 +4,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
+import sk.maroskomml.lifeplugin.model.MySqlStorage;
+import sk.maroskomml.lifeplugin.model.Storage;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -12,6 +14,7 @@ import java.util.Objects;
 public class LifePlugin extends JavaPlugin {
     private Config config = null;
     private PlayersHandler playersHandler = null;
+    private Storage storage = null;
 
     @Override
     public void onEnable() {
@@ -19,22 +22,24 @@ public class LifePlugin extends JavaPlugin {
         saveDefaultConfig();
         getConfig().options().copyDefaults(true);
         config = new Config(getConfig());
-        playersHandler = new PlayersHandler(config);
-        playersHandler.reload();
+        storage = new MySqlStorage(config);
+        playersHandler = new PlayersHandler(config, storage);
+
         PluginEventsListener pluginEventsListener = new PluginEventsListener(playersHandler);
         PluginCommands pluginCommands = new PluginCommands(config, playersHandler);
 
         ItemManager.init();
         getServer().getPluginManager().registerEvents(pluginEventsListener, this);
         registerCommands(pluginCommands);
+
         createSchedulerForRegularLifeAdding();
+        createSchedulerForStore();
 
         getServer().getConsoleSender().sendMessage(Messages.consolePluginEnabled());
     }
 
     @Override
     public void onDisable() {
-        playersHandler.store();
         super.onDisable();
     }
 
@@ -45,6 +50,7 @@ public class LifePlugin extends JavaPlugin {
         setCommandExecutor(PluginCommands.COMMAND_GIVE_LIFE, pluginCommands);
         setCommandExecutor(PluginCommands.COMMAND_SET_LIFE, pluginCommands);
         setCommandExecutor(PluginCommands.COMMAND_CYCLE_INFO, pluginCommands);
+        setCommandExecutor(PluginCommands.COMMAND_TOP_SCORE, pluginCommands);
     }
     
     private void setCommandExecutor(String commandName, CommandExecutor commandExecutor){
@@ -73,5 +79,14 @@ public class LifePlugin extends JavaPlugin {
                 ChronoUnit.valueOf(config.getLifeAddingCycleUnit())
         );
         return Instant.now().isAfter(next);
+    }
+
+    private void createSchedulerForStore(){
+        BukkitScheduler scheduler = getServer().getScheduler();
+        int periodTicks = 20;
+        scheduler.scheduleSyncRepeatingTask(this, () -> {
+            playersHandler.addToSpendTimeOnServer(periodTicks);
+            playersHandler.store();
+        }, periodTicks, periodTicks);
     }
 }
